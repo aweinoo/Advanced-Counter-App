@@ -27,32 +27,36 @@ class _HistoryPageState extends State<HistoryPage> {
 
   Future<void> _clearHistory() async {
     await _counterStorage.clearHistory();
-    setState(() {
-      _history.clear();
-    });
+    if (mounted) {
+      setState(() {
+        _history.clear();
+      });
 
-    // Show snackbar confirmation
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('History cleared successfully.'),
-        duration: Duration(seconds: 2),
-      ),
-    );
+      // Show snackbar confirmation
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('History cleared successfully.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 
   Future<void> _removeEntry(String entry) async {
     await _counterStorage.removeHistoryItem(entry);
-    setState(() {
-      _history.remove(entry);
-    });
+    if (mounted) {
+      setState(() {
+        _history.remove(entry);
+      });
 
-    // Optional: individual deletion confirmation
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Entry removed.'),
-        duration: Duration(seconds: 1),
-      ),
-    );
+      // Optional: individual deletion confirmation
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Entry removed.'),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
   }
 
   @override

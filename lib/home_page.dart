@@ -40,7 +40,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _resetCounter() {
+  void _resetCounter() async {
+    await _counterStorage.saveToHistory(); // Save before reset
     setState(() {
       _counterStorage.reset();
       _counter = _counterStorage.counter;
