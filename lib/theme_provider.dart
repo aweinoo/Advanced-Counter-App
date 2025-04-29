@@ -18,13 +18,13 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   void _loadTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool(themeKey) ?? false;
     notifyListeners();
   }
 
   void _saveTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(themeKey, _isDarkMode);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(themeKey, _isDarkMode);
   }
 }
